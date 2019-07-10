@@ -2,6 +2,7 @@ package io.flutter.plugins;
 
 import io.flutter.plugin.common.PluginRegistry;
 import xyz.luan.audioplayers.AudioplayersPlugin;
+import com.example.medianotification.MediaNotificationPlugin;
 import io.flutter.plugins.pathprovider.PathProviderPlugin;
 
 /**
@@ -13,6 +14,7 @@ public final class GeneratedPluginRegistrant {
       return;
     }
     AudioplayersPlugin.registerWith(registry.registrarFor("xyz.luan.audioplayers.AudioplayersPlugin"));
+    MediaNotificationPlugin.registerWith(registry.registrarFor("com.example.medianotification.MediaNotificationPlugin"));
     PathProviderPlugin.registerWith(registry.registrarFor("io.flutter.plugins.pathprovider.PathProviderPlugin"));
   }
 

@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_music/player_state.dart';
+import 'package:media_notification/media_notification.dart';
 
 class MusicPlayer {
   String url;
@@ -25,11 +27,13 @@ class MusicPlayer {
 
   get isPaused => playerState == PlayerState.paused;
 
-  get durationText => duration?.toString()?.split('.')?.first ?? '';
+  get durationText => durationConvert(duration);
 
-  get positionText => position?.toString()?.split('.')?.first ?? '';
+  get positionText => durationConvert(position);
 
   get hasPosition => position != null;
+
+  get hasDuration => duration != null;
 
   MusicPlayer(
       {this.url,
@@ -48,13 +52,19 @@ class MusicPlayer {
         : null;
     final result =
         await audioPlayer.play(url, isLocal: isLocal, position: playPosition);
-    if (result == 1) playerState = PlayerState.playing;
+    if (result == 1) {
+      showNotification(title, title, true);
+      playerState = PlayerState.playing;
+    }
     return result;
   }
 
   Future<int> pauseMusic() async {
     final result = await audioPlayer.pause();
-    if (result == 1) playerState = PlayerState.paused;
+    if (result == 1) {
+      showNotification(title, title, false);
+      playerState = PlayerState.paused;
+    }
     return result;
   }
 
@@ -62,6 +72,7 @@ class MusicPlayer {
     final result = await audioPlayer.stop();
     if (result == 1) {
       playerState = PlayerState.stopped;
+      hideNotification();
       position = Duration();
     }
     return result;
@@ -79,5 +90,30 @@ class MusicPlayer {
 
   void invertSeekingState() {
     isAudioSeeking = !isAudioSeeking;
+  }
+
+  String durationConvert(Duration duration) {
+    if (duration == null) return null;
+    String time = '';
+    int hours = duration.inHours;
+    int minutes = duration.inMinutes - hours * 60;
+    int seconds = duration.inSeconds - minutes * 60 - hours * 3600;
+    if (hours > 0) time += hours.toString() + ':';
+    time += minutes.toString() + ':';
+    time += seconds.toString();
+    return time;
+  }
+
+  Future<void> hideNotification() async {
+    try {
+      await MediaNotification.hide();
+    } on PlatformException {}
+  }
+
+  Future<void> showNotification(title, author, isPlaying) async {
+    try {
+      await MediaNotification.show(
+          title: title, author: author, play: isPlaying);
+    } on PlatformException {}
   }
 }

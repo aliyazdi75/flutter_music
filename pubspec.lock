@@ -88,6 +88,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.12.5"
+  media_notification:
+    dependency: "direct main"
+    description:
+      name: media_notification
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.5"
   meta:
     dependency: transitive
     description:

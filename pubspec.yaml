@@ -21,6 +21,7 @@ dependencies:
   path_provider: ^1.1.0
   http: ^0.11.3+17
   audioplayers:
+  media_notification:
   provider: ^2.0.1+1
   flutter:
     sdk: flutter

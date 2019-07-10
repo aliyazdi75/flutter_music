@@ -7,6 +7,10 @@ INJECTED from C:\Users\user\Documents\Github\flutter_music\android\app\src\main\
 MERGED from C:\Users\user\Documents\Github\flutter_music\android\app\src\main\AndroidManifest.xml:1:1-33:12
 MERGED from [:audioplayers] C:\Users\user\Documents\Github\flutter_music\build\audioplayers\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:2:1-9:12
 MERGED from [:path_provider] C:\Users\user\Documents\Github\flutter_music\build\path_provider\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:2:1-7:12
+MERGED from [:media_notification] C:\Users\user\Documents\Github\flutter_music\build\media_notification\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:2:1-12:12
+MERGED from [com.android.support:support-media-compat:27.1.1] C:\Users\user\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.1.1.aar\25fc105cf8f25b53acf3395568506475\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\user\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\84ff0898364ffe62051347cecf6bd2cc\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\user\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\c4929450021cb3cd2a4e618689d2be75\AndroidManifest.xml:17:1-22:12
 INJECTED from C:\Users\user\Documents\Github\flutter_music\android\app\src\debug\AndroidManifest.xml:1:1-7:12
 INJECTED from C:\Users\user\Documents\Github\flutter_music\android\app\src\debug\AndroidManifest.xml:1:1-7:12
 INJECTED from C:\Users\user\Documents\Github\flutter_music\android\app\src\debug\AndroidManifest.xml:1:1-7:12
@@ -26,6 +30,8 @@ INJECTED from C:\Users\user\Documents\Github\flutter_music\android\app\src\debug
 		ADDED from C:\Users\user\Documents\Github\flutter_music\android\app\src\main\AndroidManifest.xml:1:11-69
 application
 ADDED from C:\Users\user\Documents\Github\flutter_music\android\app\src\main\AndroidManifest.xml:9:5-32:19
+MERGED from [:media_notification] C:\Users\user\Documents\Github\flutter_music\build\media_notification\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:8:5-10:19
+MERGED from [:media_notification] C:\Users\user\Documents\Github\flutter_music\build\media_notification\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:8:5-10:19
 	android:label
 		ADDED from C:\Users\user\Documents\Github\flutter_music\android\app\src\main\AndroidManifest.xml:11:9-38
 	android:icon
@@ -70,6 +76,14 @@ MERGED from [:audioplayers] C:\Users\user\Documents\Github\flutter_music\build\a
 MERGED from [:audioplayers] C:\Users\user\Documents\Github\flutter_music\build\audioplayers\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:7:5-44
 MERGED from [:path_provider] C:\Users\user\Documents\Github\flutter_music\build\path_provider\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-44
 MERGED from [:path_provider] C:\Users\user\Documents\Github\flutter_music\build\path_provider\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-44
+MERGED from [:media_notification] C:\Users\user\Documents\Github\flutter_music\build\media_notification\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:6:5-44
+MERGED from [:media_notification] C:\Users\user\Documents\Github\flutter_music\build\media_notification\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:6:5-44
+MERGED from [com.android.support:support-media-compat:27.1.1] C:\Users\user\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.1.1.aar\25fc105cf8f25b53acf3395568506475\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.1] C:\Users\user\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.1.1.aar\25fc105cf8f25b53acf3395568506475\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\user\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\84ff0898364ffe62051347cecf6bd2cc\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\user\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\84ff0898364ffe62051347cecf6bd2cc\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\user\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\c4929450021cb3cd2a4e618689d2be75\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\user\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\c4929450021cb3cd2a4e618689d2be75\AndroidManifest.xml:20:5-44
 INJECTED from C:\Users\user\Documents\Github\flutter_music\android\app\src\debug\AndroidManifest.xml
 INJECTED from C:\Users\user\Documents\Github\flutter_music\android\app\src\debug\AndroidManifest.xml
 	android:targetSdkVersion
@@ -82,3 +96,7 @@ uses-permission#android.permission.INTERNET
 ADDED from C:\Users\user\Documents\Github\flutter_music\android\app\src\debug\AndroidManifest.xml:6:5-66
 	android:name
 		ADDED from C:\Users\user\Documents\Github\flutter_music\android\app\src\debug\AndroidManifest.xml:6:22-64
+receiver#com.example.medianotification.NotificationReturnSlot
+ADDED from [:media_notification] C:\Users\user\Documents\Github\flutter_music\build\media_notification\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:9:9-89
+	android:name
+		ADDED from [:media_notification] C:\Users\user\Documents\Github\flutter_music\build\media_notification\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:9:19-86

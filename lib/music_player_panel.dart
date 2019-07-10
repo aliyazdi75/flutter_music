@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_music/player_state.dart';
+import 'package:media_notification/media_notification.dart';
 
 import 'global.dart';
 
@@ -45,7 +46,7 @@ class _MusicPlayerPanelState extends State<MusicPlayerPanel> {
 
   @override
   void dispose() {
-    _musicPlayer.audioPlayer.stop();
+//    _musicPlayer.audioPlayer.stop();
     _durationSubscription?.cancel();
     _positionSubscription?.cancel();
     _playerCompleteSubscription?.cancel();
@@ -167,14 +168,27 @@ class _MusicPlayerPanelState extends State<MusicPlayerPanel> {
                         ),
                       ),
                       Flexible(
+                        flex: 1,
+                        child:
+                            !_musicPlayer.isStopped || _musicPlayer.hasPosition
+                                ? new Text(
+                                    '${_musicPlayer.positionText ?? '0:00'}',
+                                    style: new TextStyle(fontSize: 10.0),
+                                  )
+                                : new Text(
+                                    '0:00',
+                                    style: new TextStyle(fontSize: 10.0),
+                                  ),
+                      ),
+                      Flexible(
                         flex: 10,
                         child: _musicPlayer.isStopped ||
                                 !_musicPlayer.hasPosition
                             ? Slider(
                                 value: 0,
                                 onChanged: (double value) => null,
-                                activeColor: Colors.transparent,
-                                inactiveColor: Colors.transparent,
+                                activeColor: Colors.grey,
+                                inactiveColor: Colors.grey,
                               )
                             : Slider(
                                 min: 0,
@@ -209,18 +223,15 @@ class _MusicPlayerPanelState extends State<MusicPlayerPanel> {
                       ),
                       Flexible(
                         flex: 1,
-                        child:
-                            _musicPlayer.isStopped || _musicPlayer.hasPosition
-                                ? new Text(
-                                    _musicPlayer.duration != null
-                                        ? _musicPlayer.durationText
-                                        : '',
-                                    style: new TextStyle(fontSize: 10.0),
-                                  )
-                                : new Text(
-                                    '${_musicPlayer.positionText ?? ''} / ${_musicPlayer.durationText ?? ''}',
-                                    style: new TextStyle(fontSize: 10.0),
-                                  ),
+                        child: _musicPlayer.hasDuration
+                            ? new Text(
+                                '${_musicPlayer.durationText ?? '0:00'}',
+                                style: new TextStyle(fontSize: 10.0),
+                              )
+                            : new Text(
+                                '0:00',
+                                style: new TextStyle(fontSize: 10.0),
+                              ),
                       ),
                     ],
                   ),
@@ -231,6 +242,16 @@ class _MusicPlayerPanelState extends State<MusicPlayerPanel> {
   }
 
   void _initAudioPlayer() {
+    MediaNotification.setListener('pause', () {
+      setState(() => _musicPlayer.pauseMusic());
+    });
+
+    MediaNotification.setListener('play', () {
+      setState(() => _musicPlayer.playMusic());
+    });
+
+//    MediaNotification.setListener('select', () {});
+
     _durationSubscription = _musicPlayer.audioPlayer.onDurationChanged
         .listen((duration) => setState(() {
               _musicPlayer.duration = duration;

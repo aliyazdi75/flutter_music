@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_music/player_state.dart';
+import 'package:media_notification/media_notification.dart';
 
 import 'global.dart';
 
@@ -30,11 +31,11 @@ class _SecondRouteState extends State<SecondRoute> {
   @override
   void dispose() {
 //    _musicPlayer.audioPlayer.stop();
-//    _durationSubscription?.cancel();
-//    _positionSubscription?.cancel();
-//    _playerCompleteSubscription?.cancel();
-//    _playerErrorSubscription?.cancel();
-//    _playerStateSubscription?.cancel();
+    _durationSubscription?.cancel();
+    _positionSubscription?.cancel();
+    _playerCompleteSubscription?.cancel();
+    _playerErrorSubscription?.cancel();
+    _playerStateSubscription?.cancel();
     super.dispose();
   }
 
@@ -153,13 +154,25 @@ class _SecondRouteState extends State<SecondRoute> {
                     ),
                   ),
                   Flexible(
+                    flex: 1,
+                    child: !_musicPlayer.isStopped || _musicPlayer.hasPosition
+                        ? new Text(
+                            '${_musicPlayer.positionText ?? '0:00'}',
+                            style: new TextStyle(fontSize: 10.0),
+                          )
+                        : new Text(
+                            '0:00',
+                            style: new TextStyle(fontSize: 10.0),
+                          ),
+                  ),
+                  Flexible(
                     flex: 10,
                     child: _musicPlayer.isStopped || !_musicPlayer.hasPosition
                         ? Slider(
                             value: 0,
                             onChanged: (double value) => null,
-                            activeColor: Colors.transparent,
-                            inactiveColor: Colors.transparent,
+                            activeColor: Colors.grey,
+                            inactiveColor: Colors.grey,
                           )
                         : Slider(
                             min: 0,
@@ -194,15 +207,13 @@ class _SecondRouteState extends State<SecondRoute> {
                   ),
                   Flexible(
                     flex: 1,
-                    child: _musicPlayer.isStopped || _musicPlayer.hasPosition
+                    child: _musicPlayer.hasDuration
                         ? new Text(
-                            _musicPlayer.duration != null
-                                ? _musicPlayer.durationText
-                                : '',
+                            '${_musicPlayer.durationText ?? '0:00'}',
                             style: new TextStyle(fontSize: 10.0),
                           )
                         : new Text(
-                            '${_musicPlayer.positionText ?? ''} / ${_musicPlayer.durationText ?? ''}',
+                            '0:00',
                             style: new TextStyle(fontSize: 10.0),
                           ),
                   ),
@@ -216,6 +227,14 @@ class _SecondRouteState extends State<SecondRoute> {
   }
 
   void _initAudioPlayer() {
+    MediaNotification.setListener('pause', () {
+      setState(() => _musicPlayer.pauseMusic());
+    });
+
+    MediaNotification.setListener('play', () {
+      setState(() => _musicPlayer.playMusic());
+    });
+
     _durationSubscription = _musicPlayer.audioPlayer.onDurationChanged
         .listen((duration) => setState(() {
               _musicPlayer.duration = duration;

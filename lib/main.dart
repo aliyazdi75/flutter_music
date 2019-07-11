@@ -44,7 +44,7 @@ class _SoundAppState extends State<SoundApp> {
   }
 
   Widget panel() {
-    if (!_musicPlayer.isStopped)
+    if (_musicPlayer.isAudioPlaying())
       return Container(
         child: MusicPlayerPanel(),
       );

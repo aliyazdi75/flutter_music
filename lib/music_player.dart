@@ -8,6 +8,7 @@ import 'package:media_notification/media_notification.dart';
 class MusicPlayer {
   String url;
   String title;
+  String imgUrl;
   bool isLocal;
   PlayerMode mode;
 
@@ -38,6 +39,7 @@ class MusicPlayer {
   MusicPlayer(
       {this.url,
       this.title,
+      this.imgUrl,
       this.isLocal = false,
       this.mode = PlayerMode.MEDIA_PLAYER}) {
     audioPlayer = AudioPlayer(mode: mode);

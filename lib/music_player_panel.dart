@@ -85,20 +85,29 @@ class _MusicPlayerPanelState extends State<MusicPlayerPanel> {
                               _musicPlayer.playMusic();
                             }
                           },
-                          child: Container(
-                            width: double.infinity,
-                            alignment: Alignment.centerLeft,
-                            child: _musicPlayer.isPlaying
-                                ? IconButton(
-                                    onPressed: _musicPlayer.pauseMusic,
-                                    iconSize: 32.0,
-                                    icon: new Icon(Icons.pause),
-                                    color: Colors.black)
-                                : IconButton(
-                                    onPressed: _musicPlayer.playMusic,
-                                    iconSize: 32.0,
-                                    icon: new Icon(Icons.play_arrow),
-                                    color: Colors.black),
+                          child: GestureDetector(
+                            onTap: _musicPlayer.isPlaying
+                                ? _musicPlayer.pauseMusic
+                                : _musicPlayer.playMusic,
+                            child: Container(
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(_musicPlayer.imgUrl),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              child: _musicPlayer.isPlaying
+                                  ? IconButton(
+                                      iconSize: 32.0,
+                                      icon: new Icon(Icons.pause),
+                                      color: Colors.black)
+                                  : IconButton(
+                                      iconSize: 32.0,
+                                      icon: new Icon(Icons.play_arrow),
+                                      color: Colors.black),
+                            ),
                           ),
                         ),
                       ),

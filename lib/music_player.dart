@@ -86,6 +86,7 @@ class MusicPlayer {
       return;
     }
     playerState = PlayerState.stopped;
+    stopMusic();
   }
 
   void invertSeekingState() {
@@ -98,9 +99,20 @@ class MusicPlayer {
     int hours = duration.inHours;
     int minutes = duration.inMinutes - hours * 60;
     int seconds = duration.inSeconds - minutes * 60 - hours * 3600;
-    if (hours > 0) time += hours.toString() + ':';
-    time += minutes.toString() + ':';
-    time += seconds.toString();
+    if (hours > 0) {
+      if (hours < 10)
+        time += '0' + hours.toString() + ':';
+      else
+        time += hours.toString() + ':';
+    }
+    if (minutes < 10)
+      time += '0' + minutes.toString() + ':';
+    else
+      time += minutes.toString();
+    if (seconds < 10)
+      time += '0' + seconds.toString();
+    else
+      time += seconds.toString();
     return time;
   }
 

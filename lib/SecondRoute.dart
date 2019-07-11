@@ -6,7 +6,7 @@ import 'package:media_notification/media_notification.dart';
 
 import 'global.dart';
 
-const kUrl1 = 'https://luan.xyz/files/audio/ambient_c_motion.mp3';
+const kUrl1 = 'http://dl.baritm-music.ir/dl/mp3s/Billie-Eilish-I-love-you.mp3';
 
 class SecondRoute extends StatefulWidget {
   @override
@@ -14,7 +14,7 @@ class SecondRoute extends StatefulWidget {
 }
 
 class _SecondRouteState extends State<SecondRoute> {
-  Global _musicPlayer = Global(url: kUrl1, title: 'ambient_c_motion');
+  Global _musicPlayer = Global(url: kUrl1, title: 'I Love U');
 
   StreamSubscription _positionSubscription;
   StreamSubscription _durationSubscription;
@@ -158,16 +158,18 @@ class _SecondRouteState extends State<SecondRoute> {
                     child: !_musicPlayer.isStopped || _musicPlayer.hasPosition
                         ? new Text(
                             '${_musicPlayer.positionText ?? '0:00'}',
-                            style: new TextStyle(fontSize: 10.0),
+                            style: new TextStyle(fontSize: 9.0),
                           )
                         : new Text(
                             '0:00',
-                            style: new TextStyle(fontSize: 10.0),
+                            style: new TextStyle(fontSize: 9.0),
                           ),
                   ),
                   Flexible(
                     flex: 10,
-                    child: _musicPlayer.isStopped || !_musicPlayer.hasPosition
+                    child: _musicPlayer.isStopped ||
+                            !_musicPlayer.hasPosition ||
+                            !_musicPlayer.hasDuration
                         ? Slider(
                             value: 0,
                             onChanged: (double value) => null,
@@ -210,11 +212,11 @@ class _SecondRouteState extends State<SecondRoute> {
                     child: _musicPlayer.hasDuration
                         ? new Text(
                             '${_musicPlayer.durationText ?? '0:00'}',
-                            style: new TextStyle(fontSize: 10.0),
+                            style: new TextStyle(fontSize: 9.0),
                           )
                         : new Text(
                             '0:00',
-                            style: new TextStyle(fontSize: 10.0),
+                            style: new TextStyle(fontSize: 9.0),
                           ),
                   ),
                 ],

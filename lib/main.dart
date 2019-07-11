@@ -6,8 +6,6 @@ import 'music_player_panel.dart';
 
 typedef void OnError(Exception exception);
 
-const kUrl1 = 'https://luan.xyz/files/audio/ambient_c_motion.mp3';
-
 void main() {
   runApp(new MaterialApp(home: new SoundApp()));
 }

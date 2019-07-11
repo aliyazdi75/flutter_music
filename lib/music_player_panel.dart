@@ -173,17 +173,18 @@ class _MusicPlayerPanelState extends State<MusicPlayerPanel> {
                             !_musicPlayer.isStopped || _musicPlayer.hasPosition
                                 ? new Text(
                                     '${_musicPlayer.positionText ?? '0:00'}',
-                                    style: new TextStyle(fontSize: 10.0),
+                                    style: new TextStyle(fontSize: 9.0),
                                   )
                                 : new Text(
                                     '0:00',
-                                    style: new TextStyle(fontSize: 10.0),
+                                    style: new TextStyle(fontSize: 9.0),
                                   ),
                       ),
                       Flexible(
                         flex: 10,
                         child: _musicPlayer.isStopped ||
-                                !_musicPlayer.hasPosition
+                                !_musicPlayer.hasPosition ||
+                                !_musicPlayer.hasDuration
                             ? Slider(
                                 value: 0,
                                 onChanged: (double value) => null,
@@ -226,11 +227,11 @@ class _MusicPlayerPanelState extends State<MusicPlayerPanel> {
                         child: _musicPlayer.hasDuration
                             ? new Text(
                                 '${_musicPlayer.durationText ?? '0:00'}',
-                                style: new TextStyle(fontSize: 10.0),
+                                style: new TextStyle(fontSize: 9.0),
                               )
                             : new Text(
                                 '0:00',
-                                style: new TextStyle(fontSize: 10.0),
+                                style: new TextStyle(fontSize: 9.0),
                               ),
                       ),
                     ],

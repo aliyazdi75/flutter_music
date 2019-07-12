@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_music/player_state.dart';
 import 'package:media_notification/media_notification.dart';
@@ -35,6 +36,8 @@ class MusicPlayer {
   get hasPosition => position != null;
 
   get hasDuration => duration != null;
+
+  get hasImg => musicImg() != null;
 
   MusicPlayer(
       {this.url,
@@ -71,23 +74,21 @@ class MusicPlayer {
   }
 
   Future<int> stopMusic() async {
+    playerState = PlayerState.stopped;
     final result = await audioPlayer.stop();
     if (result == 1) {
-      playerState = PlayerState.stopped;
       hideNotification();
       position = Duration();
     }
     return result;
   }
 
-  void playSameMusic() {}
-
   void onMusicComplete() {
     if (loop) {
-      playSameMusic();
+      stopMusic();
+      playMusic();
       return;
     }
-    playerState = PlayerState.stopped;
     stopMusic();
   }
 
@@ -116,6 +117,10 @@ class MusicPlayer {
     else
       time += seconds.toString();
     return time;
+  }
+
+  ImageProvider musicImg() {
+    return NetworkImage(imgUrl);
   }
 
   Future<void> hideNotification() async {

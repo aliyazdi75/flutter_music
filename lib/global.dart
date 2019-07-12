@@ -21,9 +21,4 @@ class Global extends MusicPlayer {
   }
 
   Global._() : super(url: musicUrl, title: musicTitle, imgUrl: musicImgUrl);
-
-  bool isAudioPlaying() {
-    if (isStopped) return false;
-    return true;
-  }
 }

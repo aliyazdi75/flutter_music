@@ -3,28 +3,26 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_music/player_state.dart';
 import 'package:media_notification/media_notification.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import 'global.dart';
 
 class MusicPlayerPanel extends StatefulWidget {
-//  final PanelController _controller;
+  final PanelController _controller;
 
-//  MusicPlayerPanel(
-//        PanelController controller,
-//        );
-
-//      : _controller = controller;
+  MusicPlayerPanel({@required PanelController controller})
+      : _controller = controller;
 
   @override
   State<StatefulWidget> createState() {
     return new _MusicPlayerPanelState(
-//        _controller,
-        );
+      _controller,
+    );
   }
 }
 
 class _MusicPlayerPanelState extends State<MusicPlayerPanel> {
-//  PanelController controller;
+  PanelController controller;
   Global _musicPlayer;
 
   StreamSubscription _positionSubscription;
@@ -33,9 +31,9 @@ class _MusicPlayerPanelState extends State<MusicPlayerPanel> {
   StreamSubscription _playerErrorSubscription;
   StreamSubscription _playerStateSubscription;
 
-//  _MusicPlayerPanelState(
-//            this.controller,
-//     );
+  _MusicPlayerPanelState(
+    this.controller,
+  );
 
   @override
   void initState() {
@@ -46,7 +44,6 @@ class _MusicPlayerPanelState extends State<MusicPlayerPanel> {
 
   @override
   void dispose() {
-//    _musicPlayer.audioPlayer.stop();
     _durationSubscription?.cancel();
     _positionSubscription?.cancel();
     _playerCompleteSubscription?.cancel();
@@ -60,7 +57,7 @@ class _MusicPlayerPanelState extends State<MusicPlayerPanel> {
     return _musicPlayer.hasError
         ? Container()
         : Container(
-            height: 100.0,
+            height: double.infinity,
             width: double.infinity,
             alignment: Alignment.bottomCenter,
             color: Colors.amberAccent,
@@ -75,39 +72,29 @@ class _MusicPlayerPanelState extends State<MusicPlayerPanel> {
                       Flexible(
                         flex: 2,
                         child: GestureDetector(
-                          onTap: () {
-                            if (_playerErrorSubscription != null) {
-                              return;
-                            }
-                            if (_musicPlayer.isPlaying) {
-                              _musicPlayer.pauseMusic();
-                            } else {
-                              _musicPlayer.playMusic();
-                            }
-                          },
-                          child: GestureDetector(
-                            onTap: _musicPlayer.isPlaying
-                                ? _musicPlayer.pauseMusic
-                                : _musicPlayer.playMusic,
-                            child: Container(
-                              width: double.infinity,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: NetworkImage(_musicPlayer.imgUrl),
-                                  fit: BoxFit.cover,
-                                ),
+                          onTap: _musicPlayer.isPlaying
+                              ? _musicPlayer.pauseMusic
+                              : _musicPlayer.playMusic,
+                          child: Container(
+                            width: double.infinity,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: _musicPlayer.musicImg(),
+                                fit: BoxFit.cover,
                               ),
-                              child: _musicPlayer.isPlaying
-                                  ? IconButton(
-                                      iconSize: 32.0,
-                                      icon: new Icon(Icons.pause),
-                                      color: Colors.black)
-                                  : IconButton(
-                                      iconSize: 32.0,
-                                      icon: new Icon(Icons.play_arrow),
-                                      color: Colors.black),
                             ),
+                            child: _musicPlayer.isPlaying
+                                ? IconButton(
+                                    onPressed: _musicPlayer.pauseMusic,
+                                    iconSize: 32.0,
+                                    icon: new Icon(Icons.pause),
+                                    color: Colors.black)
+                                : IconButton(
+                                    onPressed: _musicPlayer.playMusic,
+                                    iconSize: 32.0,
+                                    icon: new Icon(Icons.play_arrow),
+                                    color: Colors.black),
                           ),
                         ),
                       ),
@@ -131,6 +118,20 @@ class _MusicPlayerPanelState extends State<MusicPlayerPanel> {
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
+                                Divider(
+                                  height: 10,
+                                  color: Colors.transparent,
+                                ),
+                                Text(
+                                  _musicPlayer.title.toUpperCase(),
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.grey,
+                                    letterSpacing: 1,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ],
                             ),
                           ),
@@ -142,7 +143,7 @@ class _MusicPlayerPanelState extends State<MusicPlayerPanel> {
                           width: double.infinity,
                           alignment: Alignment.centerRight,
                           child: GestureDetector(
-//                            onTap: () => controller.open(),
+                            onTap: () => controller.open(),
                             child: Container(
                               width: 32,
                               height: 32,
@@ -182,11 +183,21 @@ class _MusicPlayerPanelState extends State<MusicPlayerPanel> {
                             !_musicPlayer.isStopped || _musicPlayer.hasPosition
                                 ? new Text(
                                     '${_musicPlayer.positionText ?? '0:00'}',
-                                    style: new TextStyle(fontSize: 9.0),
+                                    style: TextStyle(
+                                      fontSize: 9,
+                                      color: Colors.black,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                   )
                                 : new Text(
                                     '0:00',
-                                    style: new TextStyle(fontSize: 9.0),
+                                    style: TextStyle(
+                                      fontSize: 9,
+                                      color: Colors.black,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                       ),
                       Flexible(
@@ -236,11 +247,21 @@ class _MusicPlayerPanelState extends State<MusicPlayerPanel> {
                         child: _musicPlayer.hasDuration
                             ? new Text(
                                 '${_musicPlayer.durationText ?? '0:00'}',
-                                style: new TextStyle(fontSize: 9.0),
+                                style: TextStyle(
+                                  fontSize: 9,
+                                  color: Colors.black,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               )
                             : new Text(
                                 '0:00',
-                                style: new TextStyle(fontSize: 9.0),
+                                style: TextStyle(
+                                  fontSize: 9,
+                                  color: Colors.black,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                       ),
                     ],

@@ -17,8 +17,7 @@ class SecondRoute extends StatefulWidget {
 }
 
 class _SecondRouteState extends State<SecondRoute> {
-  Global _musicPlayer =
-      Global(url: audioUrl, title: 'I Love U', imgUrl: imgUrl);
+  Global _musicPlayer;
 
   StreamSubscription _positionSubscription;
   StreamSubscription _durationSubscription;
@@ -28,13 +27,13 @@ class _SecondRouteState extends State<SecondRoute> {
 
   @override
   void initState() {
-    super.initState();
+    _musicPlayer = Global(url: audioUrl, title: 'I Love U', imgUrl: imgUrl);
     _initAudioPlayer();
+    super.initState();
   }
 
   @override
   void dispose() {
-//    _musicPlayer.audioPlayer.stop();
     _durationSubscription?.cancel();
     _positionSubscription?.cancel();
     _playerCompleteSubscription?.cancel();
@@ -45,6 +44,9 @@ class _SecondRouteState extends State<SecondRoute> {
 
   @override
   Widget build(BuildContext context) {
+    final double _screenHeight = MediaQuery.of(context).size.height;
+    final double _musicImgSize = _screenHeight / 2.1;
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Second Route"),
@@ -52,11 +54,11 @@ class _SecondRouteState extends State<SecondRoute> {
       body: Column(
         children: <Widget>[
           Container(
-            height: 300.0,
+            height: _musicImgSize + 50,
             width: double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(_musicPlayer.imgUrl),
+                image: _musicPlayer.musicImg(),
                 fit: BoxFit.cover,
               ),
             ),
@@ -77,16 +79,9 @@ class _SecondRouteState extends State<SecondRoute> {
                       Flexible(
                         flex: 2,
                         child: GestureDetector(
-                          onTap: () {
-                            if (_playerErrorSubscription != null) {
-                              return;
-                            }
-                            if (_musicPlayer.isPlaying) {
-                              _musicPlayer.pauseMusic();
-                            } else {
-                              _musicPlayer.playMusic();
-                            }
-                          },
+                          onTap: _musicPlayer.isPlaying
+                              ? _musicPlayer.pauseMusic
+                              : _musicPlayer.playMusic,
                           child: Container(
                             width: double.infinity,
                             alignment: Alignment.centerLeft,
@@ -128,6 +123,27 @@ class _SecondRouteState extends State<SecondRoute> {
                             ),
                           ),
                         ),
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: _musicPlayer.isStopped
+                            ? Icon(
+                                Icons.loop,
+                                size: 35,
+                                color: Colors.grey,
+                              )
+                            : IconButton(
+                                onPressed: () {
+                                  _musicPlayer.loop = !_musicPlayer.loop;
+                                },
+                                icon: Icon(
+                                  Icons.loop,
+                                  size: 35,
+                                  color: !_musicPlayer.loop
+                                      ? Colors.grey
+                                      : Colors.black,
+                                ),
+                              ),
                       ),
                     ],
                   ),

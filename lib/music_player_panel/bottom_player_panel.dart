@@ -1,27 +1,26 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_music/global.dart';
 import 'package:flutter_music/player_state.dart';
 import 'package:media_notification/media_notification.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-import 'global.dart';
-
-class MusicPlayerPanel extends StatefulWidget {
+class BottomPlayerPanel extends StatefulWidget {
   final PanelController _controller;
 
-  MusicPlayerPanel({@required PanelController controller})
+  BottomPlayerPanel({@required PanelController controller})
       : _controller = controller;
 
   @override
   State<StatefulWidget> createState() {
-    return new _MusicPlayerPanelState(
+    return new _BottomPlayerPanelState(
       _controller,
     );
   }
 }
 
-class _MusicPlayerPanelState extends State<MusicPlayerPanel> {
+class _BottomPlayerPanelState extends State<BottomPlayerPanel> {
   PanelController controller;
   Global _musicPlayer;
 
@@ -31,7 +30,7 @@ class _MusicPlayerPanelState extends State<MusicPlayerPanel> {
   StreamSubscription _playerErrorSubscription;
   StreamSubscription _playerStateSubscription;
 
-  _MusicPlayerPanelState(
+  _BottomPlayerPanelState(
     this.controller,
   );
 

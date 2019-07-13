@@ -58,8 +58,8 @@ class MusicPlayer {
     final result =
         await audioPlayer.play(url, isLocal: isLocal, position: playPosition);
     if (result == 1) {
-      showNotification(title, title, true);
       playerState = PlayerState.playing;
+      showNotification(title, title, true);
     }
     return result;
   }
@@ -67,25 +67,33 @@ class MusicPlayer {
   Future<int> pauseMusic() async {
     final result = await audioPlayer.pause();
     if (result == 1) {
-      showNotification(title, title, false);
       playerState = PlayerState.paused;
+      showNotification(title, title, false);
     }
     return result;
   }
 
-  Future<int> stopMusic() async {
-    playerState = PlayerState.stopped;
+  Future<void> stopMusic({bool force = false}) async {
     final result = await audioPlayer.stop();
     if (result == 1) {
-      hideNotification();
       position = Duration();
+      if (loop) {
+        if (force) {
+          loop = !loop;
+          playerState = PlayerState.stopped;
+          hideNotification();
+        }
+      } else {
+        playerState = PlayerState.stopped;
+        hideNotification();
+      }
     }
     return result;
   }
 
   void onMusicComplete() {
+    playerState = PlayerState.stopped;
     if (loop) {
-      stopMusic();
       playMusic();
       return;
     }

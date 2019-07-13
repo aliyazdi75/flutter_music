@@ -9,7 +9,7 @@ import 'global.dart';
 const audioUrl =
     'https://wiboweb.com/wp-content/uploads/2019/03/Billie-Eilish-i-love-you-320.mp3';
 const imgUrl =
-    'https://inews.co.uk/wp-content/uploads/2019/04/GettyImages-683989336.jpg';
+    'https://amp.insider.com/images/5d10e5939c5101174c54bb98-1334-1001.jpg';
 
 class SecondRoute extends StatefulWidget {
   @override
@@ -127,9 +127,27 @@ class _SecondRouteState extends State<SecondRoute> {
                       Flexible(
                         flex: 1,
                         child: _musicPlayer.isStopped
+                            ? IconButton(
+                                iconSize: 25.0,
+                                icon: new Icon(Icons.stop),
+                                color: Colors.grey)
+                            : IconButton(
+                                onPressed: () {
+                                  _musicPlayer.stopMusic(force: true);
+                                },
+                                icon: Icon(
+                                  Icons.stop,
+                                  size: 25.0,
+                                  color: Colors.black,
+                                ),
+                              ),
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: _musicPlayer.isStopped
                             ? Icon(
                                 Icons.loop,
-                                size: 35,
+                                size: 25.0,
                                 color: Colors.grey,
                               )
                             : IconButton(
@@ -138,7 +156,7 @@ class _SecondRouteState extends State<SecondRoute> {
                                 },
                                 icon: Icon(
                                   Icons.loop,
-                                  size: 35,
+                                  size: 25.0,
                                   color: !_musicPlayer.loop
                                       ? Colors.grey
                                       : Colors.black,

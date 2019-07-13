@@ -20,7 +20,7 @@ dependencies:
   sliding_up_panel: ^0.3.4
   path_provider: ^1.1.0
   http: ^0.11.3+17
-  audioplayers:
+  audioplayers: ^0.13.1
   media_notification:
   provider: ^2.0.1+1
   flutter:

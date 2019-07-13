@@ -53,7 +53,7 @@ class _BottomPlayerPanelState extends State<BottomPlayerPanel> {
   Widget build(BuildContext context) {
     final double _radius = 25.0;
 
-    return _musicPlayer.hasError || _musicPlayer.close
+    return _musicPlayer.hasError || _musicPlayer.closedPanel
         ? _fatherWidget
         : Scaffold(
             body: SlidingUpPanel(
@@ -211,7 +211,7 @@ class _BottomPlayerPanelState extends State<BottomPlayerPanel> {
                                 child: GestureDetector(
                                   onTap: () {
                                     _musicPlayer.stopMusic(force: true);
-                                    _musicPlayer.close = true;
+                                    _musicPlayer.closedPanel = true;
                                   },
                                   child: Container(
                                     width: 25,

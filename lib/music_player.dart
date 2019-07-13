@@ -19,7 +19,7 @@ class MusicPlayer {
   Duration position;
   bool hasError = false;
   bool loop = false;
-  bool close = false;
+  bool closedPanel = true;
   bool isAudioSeeking = false;
 
   PlayerState playerState = PlayerState.stopped;
@@ -50,7 +50,7 @@ class MusicPlayer {
   }
 
   Future<int> playMusic() async {
-    close = false;
+    closedPanel = false;
     final playPosition = (position != null &&
             duration != null &&
             position.inMilliseconds > 0 &&

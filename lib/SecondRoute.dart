@@ -1,9 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_music/global.dart';
 import 'package:flutter_music/player_state.dart';
-
-import 'global.dart';
 
 const audioUrl =
     'https://wiboweb.com/wp-content/uploads/2019/03/Billie-Eilish-i-love-you-320.mp3';

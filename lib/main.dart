@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/SecondRoute.dart';
+import 'package:flutter_music/global.dart';
 import 'package:flutter_music/music_player_panel/bottom_player_panel.dart';
 import 'package:media_notification/media_notification.dart';
-
-import 'global.dart';
 
 typedef void OnError(Exception exception);
 
@@ -17,13 +16,11 @@ class MusicApp extends StatefulWidget {
   _MusicAppState createState() => new _MusicAppState();
 }
 
-class _MusicAppState extends State<MusicApp> with WidgetsBindingObserver {
+class _MusicAppState extends State<MusicApp> {
   Global _musicPlayer;
-  AppLifecycleState _notification;
 
   @override
   void initState() {
-    WidgetsBinding.instance.addObserver(this);
     MediaNotification.setListener('pause', () {
       setState(() => _musicPlayer.pauseMusic());
     });
@@ -36,20 +33,6 @@ class _MusicAppState extends State<MusicApp> with WidgetsBindingObserver {
 
     _musicPlayer = Global();
     super.initState();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    setState(() {
-      _notification = state;
-      if (_notification == AppLifecycleState.inactive) {
-        print(AppLifecycleState.inactive);
-      } else if (_notification == AppLifecycleState.resumed) {
-        print(AppLifecycleState.resumed);
-      } else if (_notification == AppLifecycleState.paused) {
-        print(AppLifecycleState.paused);
-      }
-    });
   }
 
   @override

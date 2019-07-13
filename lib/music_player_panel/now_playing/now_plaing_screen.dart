@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_music/global.dart';
@@ -7,8 +5,6 @@ import 'package:flutter_music/music_player_panel//now_playing/music_board_contro
 import 'package:flutter_music/music_player_panel//now_playing/music_img_container.dart';
 import 'package:flutter_music/music_player_panel//now_playing/preferences_board.dart';
 import 'package:flutter_music/music_player_panel/now_playing/empty_music_img.dart';
-import 'package:flutter_music/player_state.dart';
-import 'package:media_notification/media_notification.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class NowPlayingScreen extends StatefulWidget {
@@ -29,12 +25,6 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
   PanelController _controller;
   Global _musicPlayer;
 
-  StreamSubscription _positionSubscription;
-  StreamSubscription _durationSubscription;
-  StreamSubscription _playerCompleteSubscription;
-  StreamSubscription _playerErrorSubscription;
-  StreamSubscription _playerStateSubscription;
-
   _NowPlayingScreenState(
     this._controller,
   );
@@ -43,17 +33,6 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
   void initState() {
     super.initState();
     _musicPlayer = Global();
-    _initAudioPlayer();
-  }
-
-  @override
-  void dispose() {
-    _durationSubscription?.cancel();
-    _positionSubscription?.cancel();
-    _playerCompleteSubscription?.cancel();
-    _playerErrorSubscription?.cancel();
-    _playerStateSubscription?.cancel();
-    super.dispose();
   }
 
   @override
@@ -279,53 +258,5 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
         ],
       ),
     );
-  }
-
-  void _initAudioPlayer() {
-    MediaNotification.setListener('pause', () {
-      setState(() => _musicPlayer.pauseMusic());
-    });
-
-    MediaNotification.setListener('play', () {
-      setState(() => _musicPlayer.playMusic());
-    });
-
-//    MediaNotification.setListener('select', () {});
-
-    _durationSubscription = _musicPlayer.audioPlayer.onDurationChanged
-        .listen((duration) => setState(() {
-              _musicPlayer.duration = duration;
-            }));
-
-    _positionSubscription = _musicPlayer.audioPlayer.onAudioPositionChanged
-        .listen((p) => setState(() {
-              _musicPlayer.position = p;
-            }));
-
-    _playerCompleteSubscription =
-        _musicPlayer.audioPlayer.onPlayerCompletion.listen((event) {
-      _musicPlayer.onMusicComplete();
-      setState(() {
-        _musicPlayer.position = _musicPlayer.duration;
-      });
-    });
-
-    _playerErrorSubscription =
-        _musicPlayer.audioPlayer.onPlayerError.listen((msg) {
-      print('audioPlayer error : $msg');
-      setState(() {
-        _musicPlayer.playerState = PlayerState.stopped;
-        _musicPlayer.duration = Duration(seconds: 0);
-        _musicPlayer.position = Duration(seconds: 0);
-        _musicPlayer.hasError = true;
-      });
-    });
-
-    _musicPlayer.audioPlayer.onPlayerStateChanged.listen((state) {
-      if (!mounted) return;
-      setState(() {
-        _musicPlayer.audioPlayerState = state;
-      });
-    });
   }
 }

@@ -38,7 +38,6 @@ class _SecondRouteState extends State<SecondRoute> {
     _playerCompleteSubscription?.cancel();
     _playerErrorSubscription?.cancel();
     _playerStateSubscription?.cancel();
-    _musicPlayer.hideNotification();
     super.dispose();
   }
 
@@ -127,10 +126,11 @@ class _SecondRouteState extends State<SecondRoute> {
                       Flexible(
                         flex: 1,
                         child: _musicPlayer.isStopped
-                            ? IconButton(
-                                iconSize: 25.0,
-                                icon: new Icon(Icons.stop),
-                                color: Colors.grey)
+                            ? Icon(
+                                Icons.stop,
+                                size: 25.0,
+                                color: Colors.grey,
+                              )
                             : IconButton(
                                 onPressed: () =>
                                     _musicPlayer.stopMusic(force: true),

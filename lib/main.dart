@@ -39,12 +39,6 @@ class _MusicAppState extends State<MusicApp> with WidgetsBindingObserver {
   }
 
   @override
-  void deactivate() {
-    _musicPlayer.hideNotification();
-    super.deactivate();
-  }
-
-  @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     setState(() {
       _notification = state;

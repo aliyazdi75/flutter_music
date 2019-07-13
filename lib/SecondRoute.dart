@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_music/player_state.dart';
-import 'package:media_notification/media_notification.dart';
 
 import 'global.dart';
 
@@ -39,6 +38,7 @@ class _SecondRouteState extends State<SecondRoute> {
     _playerCompleteSubscription?.cancel();
     _playerErrorSubscription?.cancel();
     _playerStateSubscription?.cancel();
+    _musicPlayer.hideNotification();
     super.dispose();
   }
 
@@ -132,9 +132,8 @@ class _SecondRouteState extends State<SecondRoute> {
                                 icon: new Icon(Icons.stop),
                                 color: Colors.grey)
                             : IconButton(
-                                onPressed: () {
-                                  _musicPlayer.stopMusic(force: true);
-                                },
+                                onPressed: () =>
+                                    _musicPlayer.stopMusic(force: true),
                                 icon: Icon(
                                   Icons.stop,
                                   size: 25.0,
@@ -252,14 +251,6 @@ class _SecondRouteState extends State<SecondRoute> {
   }
 
   void _initAudioPlayer() {
-    MediaNotification.setListener('pause', () {
-      setState(() => _musicPlayer.pauseMusic());
-    });
-
-    MediaNotification.setListener('play', () {
-      setState(() => _musicPlayer.playMusic());
-    });
-
     _durationSubscription = _musicPlayer.audioPlayer.onDurationChanged
         .listen((duration) => setState(() {
               _musicPlayer.duration = duration;

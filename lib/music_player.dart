@@ -93,11 +93,11 @@ class MusicPlayer {
 
   void onMusicComplete() {
     playerState = PlayerState.stopped;
+    stopMusic();
     if (loop) {
       playMusic();
       return;
     }
-    stopMusic();
   }
 
   void invertSeekingState() {

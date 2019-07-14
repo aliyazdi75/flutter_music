@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/SecondRoute.dart';
 import 'package:flutter_music/global.dart';
-import 'package:flutter_music/music_player_panel/bottom_player_panel.dart';
+import 'package:flutter_music/music_player_panel/music_player_panel.dart';
 import 'package:media_notification/media_notification.dart';
-
-typedef void OnError(Exception exception);
 
 void main() {
   runApp(
@@ -37,25 +35,47 @@ class _MusicAppState extends State<MusicApp> {
 
   @override
   Widget build(BuildContext context) {
-    return BottomPlayerPanel(fatherWidget: body(context));
+    return _musicPlayer.closedPanel
+        ? Scaffold(
+            appBar: AppBar(
+              title: Text('First Route'),
+            ),
+            body: Center(
+              child: RaisedButton(
+                child: Text('Open route'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SecondRoute()),
+                  );
+                },
+              ),
+            ),
+          )
+        : MusicPlayerPanel();
   }
-
-  Widget body(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('First Route'),
-      ),
-      body: Center(
-        child: RaisedButton(
-          child: Text('Open route'),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SecondRoute()),
-            );
-          },
-        ),
-      ),
-    );
-  }
+//  @override
+//  Widget build(BuildContext context) {
+//    return Scaffold(
+//      appBar: AppBar(
+//        title: Text('First Route'),
+//      ),
+//      body: Stack(
+//        children: <Widget>[
+//          Center(
+//            child: RaisedButton(
+//              child: Text('Open route'),
+//              onPressed: () {
+//                Navigator.push(
+//                  context,
+//                  MaterialPageRoute(builder: (context) => SecondRoute()),
+//                );
+//              },
+//            ),
+//          ),
+//          MusicPlayerPanel(),
+//        ],
+//      ),
+//    );
+//  }
 }

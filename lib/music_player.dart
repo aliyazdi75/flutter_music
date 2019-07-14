@@ -50,7 +50,6 @@ class MusicPlayer {
   }
 
   Future<int> playMusic() async {
-    closedPanel = false;
     final playPosition = (position != null &&
             duration != null &&
             position.inMilliseconds > 0 &&
@@ -60,6 +59,7 @@ class MusicPlayer {
     final result =
         await audioPlayer.play(url, isLocal: isLocal, position: playPosition);
     if (result == 1) {
+      closedPanel = false;
       playerState = PlayerState.playing;
       showNotification(title, title, true);
     }
@@ -98,7 +98,6 @@ class MusicPlayer {
     stopMusic();
     if (loop) {
       playMusic();
-      return;
     }
   }
 

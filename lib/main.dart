@@ -40,7 +40,7 @@ class _MusicAppState extends State<MusicApp> {
     return BottomPlayerPanel(fatherWidget: body(context));
   }
 
-  Widget body(context) {
+  Widget body(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('First Route'),

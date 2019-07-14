@@ -185,72 +185,78 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
                           inactiveColor: Color(0xFFCEE3EE),
                         ),
                 ),
-                Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15.0),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child:
-                            !_musicPlayer.isStopped || _musicPlayer.hasPosition
-                                ? new Text(
-                                    '${_musicPlayer.positionText ?? '0:00'}',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700,
-                                      color: Color(0xFFADB9CD),
-                                      letterSpacing: 1,
+                Flexible(
+                  child: Scrollbar(
+                    child: SingleChildScrollView(
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15.0),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: !_musicPlayer.isStopped ||
+                                      _musicPlayer.hasPosition
+                                  ? new Text(
+                                      '${_musicPlayer.positionText ?? '0:00'}',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700,
+                                        color: Color(0xFFADB9CD),
+                                        letterSpacing: 1,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    )
+                                  : new Text(
+                                      '0:00',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700,
+                                        color: Color(0xFFADB9CD),
+                                        letterSpacing: 1,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  )
-                                : new Text(
-                                    '0:00',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700,
-                                      color: Color(0xFFADB9CD),
-                                      letterSpacing: 1,
+                            ),
+                          ),
+                          Flexible(
+                            flex: 1,
+                            child: Container(width: double.infinity),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 15.0),
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: _musicPlayer.hasDuration
+                                  ? new Text(
+                                      '${_musicPlayer.durationText ?? '0:00'}',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700,
+                                        color: Color(0xFFADB9CD),
+                                        letterSpacing: 1,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    )
+                                  : new Text(
+                                      '0:00',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700,
+                                        color: Color(0xFFADB9CD),
+                                        letterSpacing: 1,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    Flexible(
-                      flex: 1,
-                      child: Container(width: double.infinity),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 15.0),
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: _musicPlayer.hasDuration
-                            ? new Text(
-                                '${_musicPlayer.durationText ?? '0:00'}',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700,
-                                  color: Color(0xFFADB9CD),
-                                  letterSpacing: 1,
-                                ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              )
-                            : new Text(
-                                '0:00',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700,
-                                  color: Color(0xFFADB9CD),
-                                  letterSpacing: 1,
-                                ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ],
             ),

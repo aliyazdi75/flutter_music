@@ -13,9 +13,8 @@ class BottomPlayerPanel extends StatefulWidget {
       : _fatherWidget = fatherWidget;
 
   @override
-  State<StatefulWidget> createState() {
-    return new _BottomPlayerPanelState(_fatherWidget);
-  }
+  _BottomPlayerPanelState createState() =>
+      new _BottomPlayerPanelState(_fatherWidget);
 }
 
 class _BottomPlayerPanelState extends State<BottomPlayerPanel> {
@@ -105,31 +104,13 @@ class _BottomPlayerPanelState extends State<BottomPlayerPanel> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Flexible(
-                              flex: 2,
-                              child: GestureDetector(
-                                onTap: _musicPlayer.isPlaying
-                                    ? _musicPlayer.pauseMusic
-                                    : _musicPlayer.playMusic,
-                                child: Container(
-                                  width: double.infinity,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: _musicPlayer.musicImg(),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  child: _musicPlayer.isPlaying
-                                      ? IconButton(
-                                          onPressed: _musicPlayer.pauseMusic,
-                                          iconSize: 32.0,
-                                          icon: new Icon(Icons.pause),
-                                          color: Colors.black)
-                                      : IconButton(
-                                          onPressed: _musicPlayer.playMusic,
-                                          iconSize: 32.0,
-                                          icon: new Icon(Icons.play_arrow),
-                                          color: Colors.black),
+                              flex: 3,
+                              child: Container(
+                                width: double.infinity,
+                                alignment: Alignment.center,
+                                child: Image(
+                                  image: _musicPlayer.musicImg(),
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
@@ -174,37 +155,21 @@ class _BottomPlayerPanelState extends State<BottomPlayerPanel> {
                               ),
                             ),
                             Flexible(
-                              flex: 1,
-                              child: Container(
-                                width: double.infinity,
-                                alignment: Alignment.centerRight,
-                                child: GestureDetector(
-                                  onTap: () => _panelController.open(),
-                                  child: Container(
-                                    width: 25,
-                                    height: 25,
-                                    decoration: BoxDecoration(
-                                      color: Colors.transparent,
-                                      border: Border.all(
-                                        color: Colors.black,
-                                      ),
-                                      borderRadius: BorderRadius.circular(
-                                        25,
-                                      ),
-                                    ),
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.keyboard_arrow_up,
-                                        color: Colors.black,
-                                        size: 22.0,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                              flex: 2,
+                              child: _musicPlayer.isPlaying
+                                  ? IconButton(
+                                      onPressed: _musicPlayer.pauseMusic,
+                                      iconSize: 32.0,
+                                      icon: new Icon(Icons.pause),
+                                      color: Colors.black)
+                                  : IconButton(
+                                      onPressed: _musicPlayer.playMusic,
+                                      iconSize: 32.0,
+                                      icon: new Icon(Icons.play_arrow),
+                                      color: Colors.black),
                             ),
                             Flexible(
-                              flex: 1,
+                              flex: 2,
                               child: Container(
                                 width: double.infinity,
                                 alignment: Alignment.centerRight,
@@ -213,24 +178,11 @@ class _BottomPlayerPanelState extends State<BottomPlayerPanel> {
                                     _musicPlayer.stopMusic(force: true);
                                     _musicPlayer.closedPanel = true;
                                   },
-                                  child: Container(
-                                    width: 25,
-                                    height: 25,
-                                    decoration: BoxDecoration(
-                                      color: Colors.transparent,
-                                      border: Border.all(
-                                        color: Colors.black,
-                                      ),
-                                      borderRadius: BorderRadius.circular(
-                                        25,
-                                      ),
-                                    ),
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.close,
-                                        color: Colors.black,
-                                        size: 18.0,
-                                      ),
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.close,
+                                      color: Colors.black,
+                                      size: 32.0,
                                     ),
                                   ),
                                 ),
@@ -240,12 +192,6 @@ class _BottomPlayerPanelState extends State<BottomPlayerPanel> {
                         ),
                         Row(
                           children: <Widget>[
-                            Flexible(
-                              flex: 2,
-                              child: Container(
-                                width: double.infinity,
-                              ),
-                            ),
                             Flexible(
                               flex: 1,
                               child: !_musicPlayer.isStopped ||
@@ -270,7 +216,7 @@ class _BottomPlayerPanelState extends State<BottomPlayerPanel> {
                                     ),
                             ),
                             Flexible(
-                              flex: 10,
+                              flex: 12,
                               child: _musicPlayer.isStopped ||
                                       !_musicPlayer.hasPosition ||
                                       !_musicPlayer.hasDuration

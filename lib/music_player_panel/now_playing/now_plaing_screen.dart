@@ -85,10 +85,6 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
             height: _screenHeight / 15,
           ),
           PreferencesBoard(musicPlayer: _musicPlayer),
-          Divider(
-            color: Colors.transparent,
-            height: _screenHeight / 15,
-          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 22.0),
             child: Row(
@@ -111,10 +107,6 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
                           ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                        ),
-                        Divider(
-                          height: 5,
-                          color: Colors.transparent,
                         ),
                         Text(
                           _musicPlayer.title,
@@ -158,10 +150,6 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
                 )
               ],
             ),
-          ),
-          Divider(
-            color: Colors.transparent,
-            height: _screenHeight / 22,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),

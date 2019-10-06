@@ -4,14 +4,14 @@
 
 #import "GeneratedPluginRegistrant.h"
 #import <audioplayers/AudioplayersPlugin.h>
-#import <media_notification/MediaNotificationPlugin.h>
+#import <flutter_media_notification/FlutterMediaNotificationPlugin.h>
 #import <path_provider/PathProviderPlugin.h>
 
 @implementation GeneratedPluginRegistrant
 
 + (void)registerWithRegistry:(NSObject<FlutterPluginRegistry>*)registry {
   [AudioplayersPlugin registerWithRegistrar:[registry registrarForPlugin:@"AudioplayersPlugin"]];
-  [MediaNotificationPlugin registerWithRegistrar:[registry registrarForPlugin:@"MediaNotificationPlugin"]];
+  [FlutterMediaNotificationPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterMediaNotificationPlugin"]];
   [FLTPathProviderPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTPathProviderPlugin"]];
 }
 

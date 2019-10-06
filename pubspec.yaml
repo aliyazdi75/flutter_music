@@ -21,7 +21,7 @@ dependencies:
   path_provider: ^1.1.0
   sliding_up_panel: ^0.3.4
   audioplayers: ^0.13.1
-  media_notification: ^0.0.5
+  flutter_media_notification: ^1.2.5
   flutter:
     sdk: flutter
 

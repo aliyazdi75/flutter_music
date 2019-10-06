@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_media_notification/flutter_media_notification.dart';
 import 'package:flutter_music/SecondRoute.dart';
 import 'package:flutter_music/global.dart';
 import 'package:flutter_music/music_player_panel/music_player_panel.dart';
-import 'package:media_notification/media_notification.dart';
 
 void main() {
   runApp(
@@ -27,55 +27,32 @@ class _MusicAppState extends State<MusicApp> {
       setState(() => _musicPlayer.playMusic());
     });
 
-//    MediaNotification.setListener('select', () {});
-
     _musicPlayer = Global();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return _musicPlayer.closedPanel
-        ? Scaffold(
-            appBar: AppBar(
-              title: Text('First Route'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('First Route'),
+      ),
+      body: Stack(
+        children: <Widget>[
+          Center(
+            child: RaisedButton(
+              child: Text('Open route'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SecondRoute()),
+                );
+              },
             ),
-            body: Center(
-              child: RaisedButton(
-                child: Text('Open route'),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SecondRoute()),
-                  );
-                },
-              ),
-            ),
-          )
-        : MusicPlayerPanel();
+          ),
+          MusicPlayerPanel(),
+        ],
+      ),
+    );
   }
-//  @override
-//  Widget build(BuildContext context) {
-//    return Scaffold(
-//      appBar: AppBar(
-//        title: Text('First Route'),
-//      ),
-//      body: Stack(
-//        children: <Widget>[
-//          Center(
-//            child: RaisedButton(
-//              child: Text('Open route'),
-//              onPressed: () {
-//                Navigator.push(
-//                  context,
-//                  MaterialPageRoute(builder: (context) => SecondRoute()),
-//                );
-//              },
-//            ),
-//          ),
-//          MusicPlayerPanel(),
-//        ],
-//      ),
-//    );
-//  }
 }

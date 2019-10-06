@@ -46,45 +46,43 @@ class MusicPlayerPanelState extends State<MusicPlayerPanel> {
 
     return _musicPlayer.hasError || _musicPlayer.closedPanel
         ? Container()
-        : Scaffold(
-            body: SlidingUpPanel(
-              panel: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(_radius),
-                  topRight: Radius.circular(_radius),
-                ),
-                child: NowPlayingScreen(panelController: _panelController),
-              ),
-              controller: _panelController,
-              minHeight: 110,
-              maxHeight: MediaQuery.of(context).size.height,
+        : SlidingUpPanel(
+            panel: ClipRRect(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(_radius),
                 topRight: Radius.circular(_radius),
               ),
-              collapsed: Container(
-                width: double.infinity,
-                height: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(_radius),
-                    topRight: Radius.circular(_radius),
-                  ),
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    stops: [
-                      0.0,
-                      0.7,
-                    ],
-                    colors: [
-                      Color(0xFF47ACE1),
-                      Color(0xFFDF5F9D),
-                    ],
-                  ),
+              child: NowPlayingScreen(panelController: _panelController),
+            ),
+            controller: _panelController,
+            minHeight: 110,
+            maxHeight: MediaQuery.of(context).size.height,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(_radius),
+              topRight: Radius.circular(_radius),
+            ),
+            collapsed: Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(_radius),
+                  topRight: Radius.circular(_radius),
                 ),
-                child: BottomPlayerPanel(panelController: _panelController),
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  stops: [
+                    0.0,
+                    0.7,
+                  ],
+                  colors: [
+                    Color(0xFF47ACE1),
+                    Color(0xFFDF5F9D),
+                  ],
+                ),
               ),
+              child: BottomPlayerPanel(panelController: _panelController),
             ),
           );
   }

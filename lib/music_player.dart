@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_media_notification/flutter_media_notification.dart';
 import 'package:flutter_music/player_state.dart';
-import 'package:media_notification/media_notification.dart';
 
 class MusicPlayer {
   String url;
@@ -134,14 +134,14 @@ class MusicPlayer {
 
   Future<void> hideNotification() async {
     try {
-      await MediaNotification.hide();
+      await MediaNotification.hideNotification();
     } on PlatformException {}
   }
 
   Future<void> showNotification(title, author, isPlaying) async {
     try {
-      await MediaNotification.show(
-          title: title, author: author, play: isPlaying);
+      await MediaNotification.showNotification(
+          title: title, author: author, isPlaying: isPlaying);
     } on PlatformException {}
   }
 }
